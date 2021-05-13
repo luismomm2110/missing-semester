@@ -1,0 +1,11 @@
+Explore the version history by visualizing it as a graph.
+
+git log --all --graph --decorate
+
+Who was the last person to modify README.md? (Hint: use git log with an argument)
+
+git log --follow README.md
+
+What was the commit message associated with the last modification to the collections: line of _config.yml? (Hint: use git blame and git show)
+git blame _config.yml
+git show a88b4eac

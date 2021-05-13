@@ -1,0 +1,17 @@
+*/ Find the number of words in (/urs/share/dict/words/) that contain at least three a's and don't have a 's ending. What are:wq three most common last two words of those words? sed's y command will help? How many of these 2-letter combinations are there?  
+
+sed 'y/A/a/' words | grep '\b(?:[^a ]*a){3}\S*[^s]$'
+sed 'y/A/a/' /usr/share/dict/words | grep -E '(a.*){3}.*[^s]$' | wc -l
+sed 'y/A/a/' /usr/share/dict/words | grep -E "(a.*){3,}.*[^'s]$" | sed -E 's/^.*(..$)/\1/' | sort | uniq -c | sort -rn
+sed 'y/A/a/' /usr/share/dict/words | grep -E "(a.*){3,}.*[^'s]$" | sed -E 's/^.*(..$)/\1/' | sort | uniq -c | sort -rn  | head -n3 | awk '{print $2}' | paste -sd, 
+To do in-place substitution it is quite tempting to do something like sed s/REGEX/SUBSTITUTION/ input.txt > input.txt. However this is a bad idea, why? Is this particular to sed? Use man sed to find out how to accomplish this.
+
+Parallel commands empty files before the sed process finishes
+
+
+Find your average, median, and max system boot time over the last ten boots. Use journalctl on Linux and log show on macOS, and look for log timestamps near the beginning and end of each boot.
+
+journalctl | grep "Startup.*$" | sed -E 's/.*in\s([0-9]+\.?[0-9]+)/\1/' | sed -Er 's/\.//g' | sed -Er 's/m?s//g' | sort | awk '{print }' | R --slave -e 'x <- scan(file=stdin, quiet=TRUE); summary(x)'
+!!
+cat datacovid | jq -r '.MEX.data[].new_cases as   | .BRA.data[]|"\(.new_cases) \()"' | awk '{ for (i=1; i<=NF; ++i) {sum[i]+=; =sum[i] }; print -zsh} ' | awk 'END{print}' | awk '=-'
+cat datacovid | jq -r '[.MEX.data[].new_cases] | max '

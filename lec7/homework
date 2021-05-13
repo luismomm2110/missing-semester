@@ -1,0 +1,35 @@
+Use journalctl on Linux or log show on macOS to get the super user accesses and commands in the last day. If there aren’t any you can execute some harmless commands such as sudo ls and check again.
+
+sudo journalctl --since "2021-05-11 00:00:01" --until "2021-05-11  23:59:59" | grep "sudo" 
+
+Here are some sorting algorithm implementations. Use cProfile and line_profiler to compare the runtime of insertion sort and quicksort. What is the bottleneck of each algorithm? Use then memory_profiler to check the memory consumption, why is insertion sort better? Check now the inplace version of quicksort. Challenge: Use perf to look at the cycle counts and cache hits and misses of each algorithm.
+
+
+Total time: 0.602852 s
+File: sorts.py
+Function: insertionsort at line 10
+
+Total time: 0.378679 s
+File: sorts.py
+Function: quicksort at line 22
+
+The bottleneck for insertionsort is the while loop. For quicksort, is right and left assignments. As shown above, quicksort is faster.
+
+
+ Here’s some (arguably convoluted) Python code for computing Fibonacci numbers using a function for each number
+ pycallgraph shows the fun0 was called 21 times
+
+
+A common issue is that a port you want to listen on is already taken by another process. Let’s learn how to discover that process pid. First execute python -m http.server 4444 to start a minimal web server listening on port 4444. On a separate terminal run lsof | grep LISTEN to print all listening processes and ports. Find that process pid and terminate it by running kill <PID>
+
+python -m http.server 4444
+ lsof | grep LISTEN
+ It will find the pid of the python proccess (in my case 1343)
+ kill 1343
+ [1]    1343 terminated  python3 -m http.server 4444
+
+
+Limiting processes resources can be another handy tool in your toolbox. Try running stress -c 3 and visualize the CPU consumption with htop. Now, execute taskset --cpu-list 0,2 stress -c 3 and visualize it. Is stress taking three CPUs? Why not? Read man taskset.
+
+
+taskset --cpu-list 0,2 only send process 'stressc -c 3' to cpu 0 and 2, as seen in htop
