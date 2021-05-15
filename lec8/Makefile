@@ -3,7 +3,7 @@ paper.pdf: paper.tex plot-data.png
 
 
 plot-%.png: %.dat plot.py
-	./plot.py -i $*.dat -o $@
+	python3 plot.py -i $*.dat -o $@
 
 
 .PHONY: clean
