@@ -6,7 +6,3 @@ plot-%.png: %.dat plot.py
 	python3 plot.py -i $*.dat -o $@
 
 
-.PHONY: clean
-
-clean:
-	paper.pdf
